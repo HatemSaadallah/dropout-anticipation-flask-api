@@ -17,27 +17,30 @@ def predict():
     response.headers.add("Access-Control-Allow-Origin", "*")
     response.headers.add("Access-Control-Allow-Headers", "*")
     response.headers.add("Access-Control-Allow-Methods", "*")
+    data = request.get_data()
+    data = json.loads(data)
+    print(data)
     if request.method == 'POST':
         try:
-            read_ss = int(request.values.get('read_ss'))
+            read_ss = int(data['read_ss'])
         except ValueError:
             response.status_code = 400
             response.data = json.dumps({"error": "read_ss is not a number"})
             return response
         try:
-            ever_alternative = int(request.values.get('ever_alternative'))
+            ever_alternative = int(data['ever_alternative'])
         except ValueError:
             response.status_code = 400
             response.data = json.dumps({"error": "ever_alternative is not a number"})
             return response
         try:
-            gpa = float(request.values.get('gpa'))
+            gpa = float(data['gpa'])
         except ValueError:
             response.status_code = 400
             response.data = json.dumps({"error": "gpa is not a number"})
             return response
         try:
-            african_american = int(request.values.get('african_american')) 
+            african_american = int(data['african_american'])
         except ValueError:
             response.status_code = 400
             response.data = json.dumps({"error": "african_american is not a number"})
