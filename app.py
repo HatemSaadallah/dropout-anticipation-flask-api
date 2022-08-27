@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
-
 import joblib
+import json
 
 app = Flask(__name__)
 model = joblib.load(open('model.pkl', 'rb'))
@@ -31,7 +31,7 @@ def predict():
     answer = prediction[0]
     if len(errors) > 0:
         # return status code 400
-        return {'status': 400, errors': errors}
+        return {'status': 400, 'errors': errors}
     return {'status': 200, 'answer': str(answer)}
 
 
