@@ -34,13 +34,13 @@ def predict():
             prediction = model.predict([[read_ss, ever_alternative, gpa, african_american]])
         
         except:
-            return flask.jsonify({'error': 'Invalid input'});
+            return {'error': 'Invalid input'};
         
     prediction = list(prediction)
     answer = prediction[0]
     if len(errors) > 0:
         # return {'status': 400, 'errors': errors}
-        return flask.jsonify({'status': 400, 'errors': errors})        
+        return {'status': 400, 'errors': errors}    
     return {'status': 200, 'answer': str(answer)}
 
 
