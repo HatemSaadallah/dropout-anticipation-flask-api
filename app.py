@@ -9,6 +9,7 @@ model = joblib.load(open('model.pkl', 'rb'))
 @app.route("/", methods=['POST'])
 def predict():
     prediction = []
+    errors = []
     if request.method == 'POST':
         read_ss = int(request.values.get('read_ss'))
         ever_alternative = int(request.values.get('ever_alternative'))
@@ -17,12 +18,21 @@ def predict():
 
         print(read_ss, ever_alternative, gpa, african_american)
         # create numpy array
+        if read_ss < 0 or read_ss > 100:
+            errors.append('read_ss must be between 0 and 100')
+        if ever_alternative < 0 or ever_alternative > 1:
+            errors.append('ever_alternative must be between 0 and 1')
+        if gpa < 0 or gpa > 4:
+            errors.append('gpa must be between 0 and 4')
 
         prediction = model.predict([[read_ss, ever_alternative, gpa, african_american]])
     
     prediction = list(prediction)
     answer = prediction[0]
-    return str(answer)
+    if len(errors) > 0:
+        # return status code 400
+        return {'status': 400, errors': errors}
+    return {'status': 200, 'answer': str(answer)}
 
 
 # Running the app
