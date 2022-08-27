@@ -14,11 +14,23 @@ def predict():
     errors = []
     if request.method == 'POST':
         try:
-            read_ss = int(request.values.get('read_ss'))
-            ever_alternative = int(request.values.get('ever_alternative'))
-            gpa = float(request.values.get('gpa'))
-            african_american = int(request.values.get('african_american')) 
-
+            try:
+                read_ss = int(request.values.get('read_ss'))
+            except ValueError:
+                return json.dumps({'error': 'read_ss is not a number'})
+            try:
+                ever_alternative = int(request.values.get('ever_alternative'))
+            except ValueError:
+                return json.dumps({'error': 'ever_alternative is not a number'})
+            try:
+                gpa = float(request.values.get('gpa'))
+            except ValueError:
+                return json.dumps({'error': 'gpa is not a number'})
+            try:
+                african_american = int(request.values.get('african_american')) 
+            except ValueError:
+                return json.dumps({'error': 'african_american is not a number'})
+                
             print(read_ss, ever_alternative, gpa, african_american)
             # create numpy array
             if read_ss < 0 or read_ss > 100:
