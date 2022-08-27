@@ -24,7 +24,6 @@ platformdirs==2.5.2
 pyasn1==0.4.8
 pypiwin32==223
 python-dateutil==2.8.2
-pywin32==304
 PyYAML==5.4.1
 requests==2.26.0
 rsa==4.7.2
