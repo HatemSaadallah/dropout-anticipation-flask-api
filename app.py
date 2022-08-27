@@ -25,6 +25,9 @@ def predict():
         if gpa < 0 or gpa > 4:
             errors.append('gpa must be between 0 and 4')
 
+        if african_american != 0:
+            african_american = 1
+            
         prediction = model.predict([[read_ss, ever_alternative, gpa, african_american]])
     
     prediction = list(prediction)
