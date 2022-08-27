@@ -34,7 +34,7 @@ def predict():
             prediction = model.predict([[read_ss, ever_alternative, gpa, african_american]])
         
         except:
-            return {'error': 'Invalid input'};
+            return {'status': 400, 'error': 'Invalid input'};
         
     prediction = list(prediction)
     answer = prediction[0]
